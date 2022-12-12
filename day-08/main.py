@@ -29,24 +29,29 @@ for row_index, row in enumerate(trees):
 for row_index, row in enumerate(trees):
     for column_index, tree in enumerate(row):
         left_score = right_score = up_score = down_score = 0
+        # ignore sides
         if row_index == 0 or row_index == len(trees)-1 or column_index == 0 or column_index == len(trees[0])-1:
             continue
 
+        # left score
         for neighbor in reversed(row[:column_index]):
             left_score += 1
             if neighbor >= tree:
                 break
 
+        # right score
         for neighbor in row[column_index+1:]:
             right_score += 1
             if neighbor >= tree:
                 break
 
+        # up score
         for m_row in reversed(trees[:row_index]):
             up_score += 1
             if m_row[column_index] >= tree:
                 break
 
+        # down score
         for m_row in trees[row_index+1:]:
             down_score += 1
             if m_row[column_index] >= tree:
